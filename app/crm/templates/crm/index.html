@@ -1,17 +1,42 @@
 {% extends 'crm/base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{%static 'crm/css/inde.css' %}">
+<link rel="stylesheet" href="{%static 'crm/css/index.css' %}">
 {% endblock css %}
 
 {% block title %}Home{% endblock title %}Home
 
 {% block content %}
 
-<div class="page-header">
+<div class="col-md-6 offset-md-3">
+
+
+    {% if user.is_authenticated %}
 
     <h1>Home page</h1>
 
-</div>
+    {% else %}
 
+    <div class="login-form">
+
+        <h1>Log In</h1><br>
+
+    <form method="POST" action="{% url 'home' %}" >
+        {% csrf_token %}
+        <div class="mb-3">
+
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" name="username", placeholder="Enter your Username" required>
+           
+          <div class="mb-3"><br>
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password", placeholder="Enter your Password" required>
+          </div><br>
+       
+          <button type="submit" class="btn btn-secondary">LogIn</button>
+        </div>
+
+    </form>
+</div>
+{% endif %}
 {% endblock content %}
