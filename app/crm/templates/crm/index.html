@@ -33,9 +33,18 @@
             <input type="password" class="form-control" name="password", placeholder="Enter your Password" required>
           </div><br>
        
-          <button type="submit" class="btn btn-secondary">LogIn</button>
-        </div>
+          <button type="submit" class="btn btn-primary">LogIn</button>
+        </div><br>
 
+   
+            <h4>Do not have an account? 
+                <a class="btn btn-outline-success btn-sm" 
+                style="margin-left: 20px"
+                href="{% url 'register' %}">
+                    Sign Up
+                </a>
+            </h4>
+    
     </form>
 </div>
 {% endif %}
