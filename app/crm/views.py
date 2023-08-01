@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from crm.forms import RegisterForm
+from .models import Record
 
 
 def index(request):
+    records = Record.objects.all()
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST.get('password')
@@ -18,7 +21,7 @@ def index(request):
         else:
             messages.success(request, "Wrong credentials. Please try again")
 
-    return render(request, 'crm/index.html')
+    return render(request, 'crm/index.html', {'records': records})
 
 
 def logout_view(request):
@@ -30,17 +33,17 @@ def logout_view(request):
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
-        
+
         if form.is_valid():
             form.save()
-            
+
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-            
+
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have been successfully registered")
-            
+
             return redirect('home')
     else:
         form = RegisterForm()

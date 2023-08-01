@@ -1,51 +1,97 @@
 {% extends 'crm/base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{%static 'crm/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/index.css' %}">
 {% endblock css %}
 
 {% block title %}Home{% endblock title %}Home
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3" style="text-align: center">
 
 
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
-    <h1>Home page</h1>
+            <h1>Records</h1>
 
-    {% else %}
+            {% if records %}
 
-    <div class="login-form">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-        <h1>Log In</h1><br>
+            {% else %}
 
-    <form method="POST" action="{% url 'home' %}" >
-        {% csrf_token %}
-        <div class="mb-3">
+                <div class="alert alert-primary" role="alert" style="margin-top: 50px">
+                    Database is empty
+                </div>
 
-            <label class="form-label">Username</label>
-            <input type="text" class="form-control" name="username", placeholder="Enter your Username" required>
-           
-          <div class="mb-3"><br>
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" name="password", placeholder="Enter your Password" required>
-          </div><br>
-       
-          <button type="submit" class="btn btn-primary">LogIn</button>
-        </div><br>
+            {% endif %}
 
-   
-            <h4>Do not have an account? 
-                <a class="btn btn-outline-success btn-sm" 
-                style="margin-left: 20px"
-                href="{% url 'register' %}">
-                    Sign Up
-                </a>
-            </h4>
-    
-    </form>
-</div>
-{% endif %}
+            <button type="button" class="btn btn-outline-primary btn-lg">Add new Record</button>
+
+        {% else %}
+
+            <div class="login-form">
+
+                <h1>Log In</h1><br>
+
+                <form method="POST" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" , placeholder="Enter your Username"
+                               required>
+
+                        <div class="mb-3"><br>
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" ,
+                                   placeholder="Enter your Password" required>
+                        </div>
+                        <br>
+
+                        <button type="submit" class="btn btn-primary">LogIn</button>
+                    </div>
+                    <br>
+
+
+                    <h4>Do not have an account?
+                        <a class="btn btn-outline-success btn-sm"
+                           style="margin-left: 20px"
+                           href="{% url 'register' %}">
+                            Sign Up
+                        </a>
+                    </h4>
+
+                </form>
+            </div>
+        {% endif %}
 {% endblock content %}
