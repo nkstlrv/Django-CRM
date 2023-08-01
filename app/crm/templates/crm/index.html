@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <div class="col-md-6 offset-md-3" style="text-align: center">
+    <div class="col-md-9 offset-md-1" style="text-align: center">
 
 
         {% if user.is_authenticated %}
@@ -17,33 +17,30 @@
 
             {% if records %}
 
-                <table class="table table-striped">
+                <table class="table table-striped" style="margin-top: 30px">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Created at</th>
                     </tr>
                     </thead>
                     <tbody>
+                    {% for record in records %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{record.id}}</th>
+                        <td>{{record.first_name}}</td>
+                        <td>{{ record.last_name }}</td>
+                        <td>{{ record.age }}</td>
+                        <td>{{ record.email }}</td>
+                        <td>{{ record.phone_number }}</td>
+                        <td>{{ record.created_at }}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
 
@@ -55,7 +52,7 @@
 
             {% endif %}
 
-            <button type="button" class="btn btn-outline-primary btn-lg">Add new Record</button>
+            <a style="margin-top: 30px" href="{% url 'record-create' %}" type="button" class="btn btn-outline-primary btn-lg">Add new Record</a>
 
         {% else %}
 
@@ -73,7 +70,7 @@
 
                         <div class="mb-3"><br>
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" ,
+                            <input type="password" class="form-control" name="password",
                                    placeholder="Enter your Password" required>
                         </div>
                         <br>

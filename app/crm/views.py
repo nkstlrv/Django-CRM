@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import reverse_lazy
+
 from crm.forms import RegisterForm
 from .models import Record
+from django.views.generic import CreateView
 
 
 def index(request):
@@ -49,3 +52,11 @@ def register_view(request):
         form = RegisterForm()
         return render(request, 'crm/register.html', {'form': form})
     return render(request, 'crm/register.html', {'form': form})
+
+
+class RecordCreateView(CreateView):
+    model = Record
+    # form_class = None
+    fields = ('__all__')
+    template_name = 'crm/record_create.html'
+    success_url = reverse_lazy('home')
