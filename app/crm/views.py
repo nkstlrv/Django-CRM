@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from crm.forms import RegisterForm
+from crm.forms import RegisterForm, RecordForm
 from .models import Record
 from django.views.generic import CreateView
 
@@ -56,7 +56,6 @@ def register_view(request):
 
 class RecordCreateView(CreateView):
     model = Record
-    # form_class = None
-    fields = ('__all__')
+    form_class = RecordForm
     template_name = 'crm/record_create.html'
     success_url = reverse_lazy('home')

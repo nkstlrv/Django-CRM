@@ -10,13 +10,46 @@
 
     <div class="col-md-6 offset-md-3" style="text-align: center">
 
-        <form method="post">
+        <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <label>
+                    <input type="text" class="form-control" name="first_name", placeholder="Enter name"
+                           required>
+                </label></div>
 
-        <button type="submit">Create</button>
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <label>
+                    <input type="text" class="form-control" name="first_name", placeholder="Enter surname"
+                           required>
+                </label></div>
+
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <label>
+                    <input type="number" class="form-control" name="age", placeholder="Enter age"
+                           required>
+                </label></div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <label>
+                    <input type="number" class="form-control" name="email", placeholder="Enter email"
+                           required>
+                </label></div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone number</label>
+                <label>
+                    <input type="text" class="form-control" name="email", placeholder="Enter phone number"
+                           required>
+                </label></div>
+
+
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
-
     </div>
 
 {% endblock content %}
